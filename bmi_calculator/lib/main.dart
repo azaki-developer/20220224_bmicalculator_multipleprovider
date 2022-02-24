@@ -1,4 +1,7 @@
+import 'package:bmi_calculator/height_provider.dart';
+import 'package:bmi_calculator/weight_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'home_page.dart';
 
@@ -8,9 +11,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WeightProvider>(
+          create: (context) => WeightProvider(),
+        ),
+        ChangeNotifierProvider<HeightProvider>(
+          create: (context) => HeightProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
     );
   }
 }
